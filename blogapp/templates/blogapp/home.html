@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-6">Derniers articles</h1>
+
+<div class="grid md:grid-cols-2 gap-6">
+    {% for article in articles %}
+        <div class="bg-white p-6 rounded shadow">
+            <h2 class="text-xl font-semibold mb-2">
+                <a href="#" class="hover:text-blue-600">
+                    {{ article.title }}
+                </a>
+            </h2>
+            <p class="text-gray-600 text-sm mb-3">
+                {{ article.category }} · {{ article.published_at|date:"d M Y" }}
+            </p>
+            <p class="text-gray-700">
+                {{ article.content|truncatewords:25 }}
+            </p>
+            <a href="#" class="text-gray-700 hover:text-blue-800"> Voir plus...</a>
+        </div>
+    {% empty %}
+        <p>Aucun article publié.</p>
+    {% endfor %}
+</div>
+{% endblock %}
