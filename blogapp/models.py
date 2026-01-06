@@ -31,7 +31,8 @@ class Article(models.Model):
         ('published', 'Publié'),
     ]
 
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='articles/images/', null=True, blank=True)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles')
@@ -64,3 +65,18 @@ class Article(models.Model):
             self.published_at = timezone.now()
         super().save(*args, **kwargs)
     
+
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Contact Message"
+        verbose_name_plural = "Contact Messages"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"Message from {self.name} - {self.subject}"

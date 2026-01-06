@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<article class="bg-white p-6 rounded shadow">
+    <h1 class="text-2xl md:text-3xl font-bold mb-4">{{ article.title }}</h1>
+
+    <img src="{{ article.image }}" alt="{{  article.title }}" class="w-full h-auto mb-4 rounded">
+
+    <p class="text-sm text-gray-600 mb-4">
+        Auteur : {{ article.author }} · {{ article.published_at|date:"d M Y" }}
+    </p>
+
+    <div class="text-gray-800 leading-relaxed mb-6">
+        {{ article.content }}
+    </div>
+
+    {% if user.is_authenticated and user == article.author or user.is_superuser %}
+        <div class="flex flex-col sm:flex-row gap-3">
+            <a href="{% url 'article_update' article.pk %}"
+               class="bg-yellow-500 text-white px-4 py-2 rounded text-center hover:bg-yellow-600">
+                Modifier
+            </a>
+
+            <form method="post" action="#" class="w-full">
+                {% csrf_token %}
+                <button type="submit"
+                        class="bg-red-600 text-white px-4 py-2 rounded w-[100px] hover:bg-red-700">
+                    Supprimer
+                </button>
+            </form>
+        </div>
+    {% endif %}
+</article>
+{% endblock %}

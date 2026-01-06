@@ -21,19 +21,19 @@
 <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
 
     <!-- Logo -->
-    <a href="#" class="text-xl font-bold text-blue-600">
+    <a href="{% url 'home' %}" class="text-xl font-bold text-blue-600">
         Getsmarter
     </a>
 
     <!-- Desktop menu -->
     <div class="hidden md:flex space-x-6 items-center">
-        <a href="#" class="hover:text-blue-600">Articles</a>
-        <a href="#" class="hover:text-blue-600">À propos</a>
-        <a href="#" class="hover:text-blue-600">Contact</a>
+        <a href="{% url 'article_list' %}" class="hover:text-blue-600">Articles</a>
+        <a href="{% url 'about' %}" class="hover:text-blue-600">À propos</a>
+        <a href="{% url 'contact' %}" class="hover:text-blue-600">Contact</a>
 
         {% if user.is_authenticated %}
             {% if perms.blog.add_article %}
-                <a href="#"
+                <a href="{% url 'article_form' %}"
                    class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                     Nouvel article
                 </a>
@@ -59,9 +59,9 @@
 <!-- Mobile menu -->
 <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
     <div class="px-4 py-3 space-y-2">
-        <a href="#" class="block">Articles</a>
-        <a href="#" class="block">À propos</a>
-        <a href="#" class="block">Contact</a>
+        <a href="{% url 'article_list' %}" class="block hover:bg-slate-500">Articles</a>
+        <a href="{% url 'about' %}" class="block hover:bg-slate-500">À propos</a>
+        <a href="{% url 'contact' %}" class="block hover:bg-slate-500">Contact</a>
 
         {% if user.is_authenticated %}
             {% if perms.blog.add_article %}
@@ -88,7 +88,7 @@
 </main>
 
 <footer class="bg-white shadow ">
-    <p class="text-center">All right reserved | 2025</p>
+    <p class="text-center">Copyr</p>
 </footer>
 
 </body>

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Modifier l’article{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto bg-white p-6 rounded shadow">
+
+    <h1 class="text-2xl font-bold mb-6">
+        Modifier l’article
+    </h1>
+
+    <!-- FORMULAIRE SÉCURISÉ -->
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div class="flex flex-col sm:flex-row gap-3">
+            <button type="submit"
+                    class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+                Enregistrer les modifications
+            </button>
+
+            <a href="{% url 'article_detail' article.slug %}"
+               class="px-6 py-2 border rounded text-center">
+                Annuler
+            </a>
+        </div>
+    </form>
+
+</div>
+{% endblock %}

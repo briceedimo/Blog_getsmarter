@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="bg-white p-6 rounded shadow max-w-lg mx-auto">
+    <h1 class="text-xl font-bold mb-4">Supprimer l’article</h1>
+
+    <p class="mb-6">
+        Confirmer la suppression de <strong>{{ article.title }}</strong> ?
+    </p>
+
+    <form method="post" class="flex flex-col sm:flex-row gap-3">
+        {% csrf_token %}
+        <button type="submit"
+                class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
+            Supprimer
+        </button>
+        <a href="{% url 'article_detail' article.slug %}"
+           class="px-4 py-2 border rounded text-center">
+            Annuler
+        </a>
+    </form>
+</div>
+{% endblock %}

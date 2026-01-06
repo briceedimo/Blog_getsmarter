@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-xl md:text-2xl font-bold mb-6">Article</h1>
+
+<form method="post" action="{% url 'home' %}" class="bg-white p-6 rounded shadow space-y-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit"
+            class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 w-full sm:w-auto">
+        Enregistrer
+    </button>
+</form>
+{% endblock %}
