@@ -1,3 +1,5 @@
+from django.conf.urls.static import static
+from django.conf import settings
 from django.urls import path
 from . import views
 
@@ -13,5 +15,5 @@ urlpatterns = [
     # Actions sécurisées
     path('article/create/', views.article_form, name='article_form'),
     path('article/<slug:slug>/edit/', views.article_update, name='article_update'),
-    path('article/<int:pk>/confirm_delete/', views.article_detail, name='article_detail'),
-]
+    path('article/<slug:slug>/confirm_delete/', views.article_confirm_delete, name='article_confirm_delete'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

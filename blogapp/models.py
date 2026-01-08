@@ -31,6 +31,7 @@ class Article(models.Model):
         ('published', 'Publié'),
     ]
 
+    id = models.IntegerField(primary_key=True, auto_created=True, unique=True)
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to='articles/images/', null=True, blank=True)
     slug = models.SlugField(max_length=200, unique=True, blank=True)

@@ -5,6 +5,7 @@ from django.http import HttpResponseForbidden
 
 from .models import Article, Category, ContactMessage
 from django.contrib import messages
+from django.contrib.auth.models import User
 from .forms import ArticleForm
 
 # Vue pour la page d’accueil
@@ -43,10 +44,11 @@ def article_form(request):
             article.author = request.user
             article.published_at = timezone.now()
             article.save()
-            return redirect('article_detail', slug=article.slug)
+            return redirect('article_list', slug=article.slug)
     else:
         form = ArticleForm()
     return render(request, 'blogapp/article_form.html', {'form': form})
+
 
 
 # Modification d'un article
@@ -72,8 +74,8 @@ def article_update(request, slug):
 # Suppression d'un article
 
 @login_required
-def article_confirm_delete(request, pk):
-    article = get_object_or_404(Article, pk=pk)
+def article_confirm_delete(request, slug):
+    article = get_object_or_404(Article, slug=slug)
 
     if request.user != article.author and not request.user.is_superuser:
         return HttpResponseForbidden("Accès refusé")

@@ -87,9 +87,81 @@
 {% block content %}{% endblock %}
 </main>
 
-<footer class="bg-white shadow ">
-    <p class="text-center">Copyr</p>
+
+{% comment %} FOOTER {% endcomment %}
+<footer class="bg-blue-900 text-gray-300 mt-16">
+    <div class="max-w-7xl mx-auto px-4 py-10 ">
+
+        <!-- GRILLE PRINCIPALE -->
+        <div class="flex md:grid-cols-3 gap-8">
+
+            <!-- À PROPOS -->
+            <div class="w-[30%] md:w-auto">
+                <h3 class="text-lg font-semibold text-white mb-4">
+                    À propos
+                </h3>
+                <p class="text-sm leading-relaxed">
+                    Cette application est un blog développé avec Django.
+                    Elle permet la publication sécurisée d’articles et la
+                    gestion des contenus via une interface d’administration.
+                </p>
+            </div>
+
+            <!-- NAVIGATION -->
+            <div>
+                <h3 class="text-lg font-semibold text-white mb-4">
+                    Navigation
+                </h3>
+                <ul class="space-y-2 text-sm">
+                    <li>
+                        <a href="{% url 'article_list' %}" class="hover:text-white">
+                            Articles
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'contact' %}" class="hover:text-white">
+                            Contact
+                        </a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'article_form' %}" class="hover:text-white">
+                                Nouvel article
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <!-- INFORMATIONS -->
+            <div>
+                <h3 class="text-lg font-semibold text-white mb-4">
+                    Informations
+                </h3>
+                <ul class="space-y-2 text-sm">
+                    <li>
+                        <span class="text-gray-400">Technologies :</span>  
+                        Django, Python, Tailwind CSS
+                    </li>
+                    <li>
+                        <span class="text-gray-400">Sécurité :</span>  
+                        Authentification, permissions, CSRF
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- SÉPARATEUR -->
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-sm">
+            <p>
+                © {% now "Y" %} Blog Django — Tous droits réservés.
+            </p>
+        </div>
+
+    </div>
 </footer>
+
 
 </body>
 </html>
